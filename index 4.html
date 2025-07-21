@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tigrinho Falso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f79d00, #64f38c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .game {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 300px;
+        }
+        .slots {
+            font-size: 50px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background: #f79d00;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #e68900;
+        }
+        .saldo {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game">
+        <h1>🎰 Tigrinho Falso</h1>
+        <div class="slots" id="slots">🐯 🐯 🐯</div>
+        <button onclick="girar()">Girar</button>
+        <div class="saldo">Saldo: <span id="saldo">1000</span> moedas</div>
+        <button style="margin-top:10px;background:#64f38c;" onclick="reset()">Resetar</button>
+    </div>
+
+    <script>
+        let saldo = 1000;
+        const emojis = ["🐯","🍒","🍋","⭐","💎","7️⃣"];
+
+        function girar() {
+            if (saldo <= 0) {
+                alert("Saldo zerado! Clique em Resetar.");
+                return;
+            }
+            saldo -= 50;
+            let s1 = emojis[Math.floor(Math.random()*emojis.length)];
+            let s2 = emojis[Math.floor(Math.random()*emojis.length)];
+            let s3 = emojis[Math.floor(Math.random()*emojis.length)];
+            document.getElementById("slots").innerText = s1 + " " + s2 + " " + s3;
+
+            if (s1 === s2 && s2 === s3) {
+                saldo += 500;
+                alert("🎉 Parabéns! Você ganhou 500 moedas!");
+            }
+            document.getElementById("saldo").innerText = saldo;
+        }
+
+        function reset() {
+            saldo = 1000;
+            document.getElementById("saldo").innerText = saldo;
+            document.getElementById("slots").innerText = "🐯 🐯 🐯";
+        }
+    </script>
+</body>
+</html>
